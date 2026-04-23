@@ -3,400 +3,461 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Уведомление от администрации Pixel</title>
-<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Уведомление от администрации Pixel Pay</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   :root {
-    --ink: #1a1a1a;
-    --ink-soft: #4a4a4a;
-    --ink-muted: #888;
-    --paper: #f9f6f0;
-    --paper-warm: #f2ede4;
-    --accent: #c0392b;
-    --accent-soft: #e8d5d3;
-    --accent-green: #27ae60;
-    --accent-green-soft: #d5ede0;
-    --border: #d4cdc2;
-    --mono: 'JetBrains Mono', monospace;
-    --serif: 'Literata', Georgia, serif;
+    --purple-deep: #3a1a8a;
+    --purple-main: #5b2ec8;
+    --purple-mid: #7c4fd4;
+    --purple-light: #a07ee0;
+    --purple-pale: #ddd4f5;
+    --purple-bg: #eeeaf8;
+    --gold: #f5c518;
+    --gold-dark: #d4a000;
+    --white: #ffffff;
+    --ink: #1a0a3a;
+    --ink-soft: #3d2a6e;
+    --ink-muted: #7a6a9a;
+    --body: 'Nunito', sans-serif;
   }
-
-  html { font-size: 18px; }
-
+ 
+  html { font-size: 17px; }
+ 
   body {
-    background: var(--paper);
+    background-color: var(--purple-bg);
+    background-image: url('bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     color: var(--ink);
-    font-family: var(--serif);
+    font-family: var(--body);
     line-height: 1.75;
     min-height: 100vh;
     padding: 0 1rem;
   }
-
-  .page {
-    max-width: 660px;
-    margin: 0 auto;
-    padding: 3.5rem 0 6rem;
+ 
+  .page { max-width: 680px; margin: 0 auto; padding: 2.5rem 0 6rem; }
+ 
+  /* ── HEADER ── */
+  .header {
+    background: var(--purple-main);
+    border-radius: 20px;
+    padding: 2rem 2rem 1.75rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
   }
-
-  .top-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .top-label::after {
+ 
+  .header::before {
     content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px),
+      repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px);
+    pointer-events: none;
   }
-
-  h1 {
-    font-family: var(--serif);
-    font-size: 2.1rem;
-    font-weight: 600;
+ 
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+ 
+  .logo-img { height: 48px; width: auto; }
+ 
+  .piggy-header {
+    height: 80px;
+    width: auto;
+    image-rendering: pixelated;
+    opacity: 0.92;
+    margin-top: -8px;
+  }
+ 
+  .admin-label {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--purple-deep);
+    padding: 0.35rem 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 0.9rem;
+    box-shadow: 3px 3px 0 var(--gold-dark);
+  }
+ 
+  .header h1 {
+    font-size: 1.65rem;
+    font-weight: 900;
     line-height: 1.25;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
+    color: var(--white);
+    margin-bottom: 0.6rem;
   }
-
-  .subtitle {
-    font-size: 1.05rem;
-    color: var(--ink-soft);
-    font-style: italic;
-    margin-bottom: 2rem;
-    font-weight: 300;
+ 
+  .header .subtitle {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.72);
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
   }
-
+ 
   .meta-row {
     display: flex;
-    padding: 1rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2.5rem;
     flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
+    gap: 0.5rem 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.18);
   }
-
-  .meta-item {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.05em;
-  }
-
-  .meta-item strong { color: var(--accent); font-weight: 500; }
-
+ 
+  .meta-item { font-size: 0.75rem; color: rgba(255,255,255,0.58); font-weight: 600; }
+  .meta-item strong { color: var(--gold); font-weight: 800; }
+ 
+  /* ── BANNERS ── */
   .alert-banner {
-    background: var(--accent-soft);
-    border-left: 3px solid var(--accent);
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.25rem;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .alert-banner p { font-size: 0.95rem; color: var(--ink); line-height: 1.6; }
-  .alert-banner p strong { color: var(--accent); }
-
-  .good-banner {
-    background: var(--accent-green-soft);
-    border-left: 3px solid var(--accent-green);
-    padding: 1rem 1.25rem;
-    margin-bottom: 2.5rem;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .good-banner p { font-size: 0.95rem; color: var(--ink); line-height: 1.6; }
-
-  section { margin-bottom: 2.5rem; }
-
-  h2 {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 0.9rem;
+    background: #fff0f0;
+    border-left: 4px solid #e53935;
+    border-radius: 0 12px 12px 0;
+    padding: 0.9rem 1.1rem 0.9rem 1rem;
+    margin-bottom: 0.875rem;
     display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
-
-  h2 .section-num {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--accent);
+ 
+  .banner-icon { width: 32px; height: 32px; image-rendering: pixelated; flex-shrink: 0; margin-top: 2px; }
+ 
+  .alert-banner p { font-size: 0.95rem; color: #5a1010; line-height: 1.6; font-weight: 400; margin: 0; }
+  .alert-banner strong { color: #c0392b; font-weight: 800; }
+ 
+  .good-banner {
+    background: #f0fff5;
+    border-left: 4px solid #27ae60;
+    border-radius: 0 12px 12px 0;
+    padding: 0.9rem 1.1rem 0.9rem 1rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+ 
+  .good-banner p { font-size: 0.95rem; color: #0a4a22; line-height: 1.6; font-weight: 400; margin: 0; }
+  .good-banner strong { font-weight: 800; }
+ 
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 1.6rem 1.75rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 14px rgba(91,46,200,0.08);
+  }
+ 
+  .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+ 
+  .section-num {
+    font-size: 0.6rem;
+    font-weight: 900;
     letter-spacing: 0.1em;
-    font-weight: 500;
-    padding: 0.15rem 0.4rem;
-    border: 1px solid var(--accent-soft);
-    border-radius: 3px;
-    position: relative;
-    top: -1px;
+    color: var(--purple-main);
+    background: var(--purple-pale);
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
     flex-shrink: 0;
   }
-
-  p {
-    font-size: 1rem;
-    color: var(--ink-soft);
-    margin-bottom: 1rem;
-    font-weight: 300;
-  }
-
+ 
+  h2 { font-size: 1.1rem; font-weight: 900; color: var(--ink); line-height: 1.3; }
+ 
+  p { font-size: 0.975rem; color: var(--ink-soft); margin-bottom: 0.9rem; font-weight: 400; line-height: 1.7; }
   p:last-child { margin-bottom: 0; }
-
-  .steps {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 0.25rem;
+ 
+  .key-highlight {
+    background: var(--purple-pale);
+    border-left: 4px solid var(--purple-main);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0 0;
   }
-
-  .steps li {
-    display: grid;
-    grid-template-columns: 2rem 1fr;
-    gap: 0.75rem;
-    align-items: start;
+ 
+  .key-highlight p { font-size: 0.93rem; margin-bottom: 0.5rem; color: var(--ink); }
+  .key-highlight p:last-child { margin-bottom: 0; }
+  .key-highlight strong { font-weight: 800; color: var(--purple-deep); }
+ 
+  .em-gold {
+    font-weight: 800;
+    color: var(--purple-deep);
+    background: linear-gradient(to bottom, transparent 58%, rgba(245,197,24,0.45) 58%);
+    padding: 0 2px;
   }
-
+ 
+  .em-red { font-weight: 800; color: #c0392b; }
+ 
+  /* ── STEPS ── */
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
+  .steps li { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; align-items: start; }
+ 
   .step-num {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--paper);
-    background: var(--ink);
-    border-radius: 50%;
-    width: 1.5rem;
-    height: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: var(--white);
+    background: var(--purple-main);
+    border-radius: 8px;
+    width: 1.85rem;
+    height: 1.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin-top: 0.2rem;
-    font-weight: 500;
+    margin-top: 0.1rem;
+    box-shadow: 2px 2px 0 var(--purple-deep);
   }
-
-  .step-text {
-    font-size: 1rem;
-    color: var(--ink-soft);
-    font-weight: 300;
-    line-height: 1.65;
-  }
-
-  .step-text strong { color: var(--ink); font-weight: 600; }
-
-  .highlight-box {
-    background: var(--paper-warm);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1.25rem 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .highlight-box p { font-size: 0.95rem; margin-bottom: 0.75rem; }
-  .highlight-box p:last-child { margin-bottom: 0; }
-
+ 
+  .step-text { font-size: 0.975rem; color: var(--ink-soft); line-height: 1.65; }
+  .step-text strong { color: var(--ink); font-weight: 800; }
+ 
   .example-box {
-    background: var(--paper);
-    border: 1px dashed var(--border);
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
+    background: var(--purple-bg);
+    border: 1.5px dashed var(--purple-light);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
     margin-top: 0.75rem;
   }
-
+ 
   .example-label {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-muted);
+    color: var(--purple-mid);
     margin-bottom: 0.4rem;
   }
-
-  .example-box p { font-size: 0.9rem; font-style: italic; color: var(--ink-soft); margin-bottom: 0; }
-
-  .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
-
-  .timeline {
+ 
+  .example-box p { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 0; }
+ 
+  /* ── COIN DIVIDER ── */
+  .coin-divider {
     display: flex;
-    flex-direction: column;
-    position: relative;
-    margin-top: 0.5rem;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.25rem 0 0.25rem;
+    opacity: 0.5;
   }
-
+ 
+  .coin-divider img { width: 20px; height: 20px; image-rendering: pixelated; }
+  .coin-divider-line { flex: 1; height: 1px; background: var(--purple-pale); }
+ 
+  /* ── TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; position: relative; margin-top: 0.5rem; }
+ 
   .timeline::before {
     content: '';
     position: absolute;
     left: 0.6rem;
     top: 0.5rem;
     bottom: 0.5rem;
-    width: 1px;
-    background: var(--border);
+    width: 2px;
+    background: var(--purple-pale);
   }
-
-  .timeline-item {
-    display: grid;
-    grid-template-columns: 1.75rem 1fr;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    align-items: start;
-  }
-
+ 
+  .timeline-item { display: grid; grid-template-columns: 1.75rem 1fr; gap: 0.75rem; padding: 0.6rem 0; }
+ 
   .timeline-dot {
     width: 1.3rem;
     height: 1.3rem;
-    border-radius: 50%;
-    border: 1.5px solid var(--border);
-    background: var(--paper);
+    border-radius: 5px;
+    border: 2px solid var(--purple-pale);
+    background: var(--white);
     flex-shrink: 0;
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
     position: relative;
     z-index: 1;
+    box-shadow: 2px 2px 0 var(--purple-pale);
   }
-
-  .timeline-dot.active { background: var(--accent); border-color: var(--accent); }
-
-  .timeline-content { padding-bottom: 0.5rem; }
-
-  .timeline-date {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.15rem;
-  }
-
-  .timeline-label { font-size: 0.95rem; color: var(--ink); font-weight: 400; line-height: 1.5; }
-  .timeline-label.active { color: var(--accent); font-weight: 600; }
-
+ 
+  .timeline-dot.active { background: var(--purple-main); border-color: var(--purple-main); box-shadow: 2px 2px 0 var(--purple-deep); }
+ 
+  .timeline-date { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.2rem; }
+  .timeline-label { font-size: 0.93rem; color: var(--ink); font-weight: 400; line-height: 1.5; }
+  .timeline-label.active { color: var(--purple-main); font-weight: 800; }
+ 
+  /* ── CONTACTS ── */
   .contacts-box {
-    background: var(--paper-warm);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    background: var(--purple-bg);
+    border: 1.5px solid var(--purple-pale);
+    border-radius: 14px;
     padding: 0.25rem 1.5rem;
     margin-top: 1rem;
   }
-
-  .contact-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-
+ 
+  .contact-row { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--purple-pale); }
   .contact-row:last-child { border-bottom: none; }
-
-  .contact-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.08em;
-    min-width: 5rem;
-  }
-
-  .contact-value { font-size: 0.95rem; color: var(--ink); font-weight: 400; }
-
+  .contact-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple-mid); min-width: 5rem; }
+  .contact-value { font-size: 0.95rem; color: var(--purple-deep); font-weight: 700; }
+ 
+  /* ── FAREWELL ── */
   .farewell {
-    border-top: 2px solid var(--ink);
-    padding-top: 1.75rem;
-    margin-top: 3rem;
+    background: var(--purple-main);
+    border-radius: 20px;
+    padding: 1.75rem;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
   }
-
-  .farewell p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; font-weight: 300; }
-  .farewell p + p { margin-top: 0.75rem; }
-
-  .alternatives { margin-top: 1.5rem; }
-
+ 
+  .farewell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px),
+      repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px);
+    pointer-events: none;
+  }
+ 
+  .farewell-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.1rem;
+    gap: 1rem;
+  }
+ 
+  .farewell-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1.3;
+  }
+ 
+  .piggy-farewell {
+    height: 72px;
+    width: auto;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+ 
+  .farewell p { font-size: 0.93rem; color: rgba(255,255,255,0.85); line-height: 1.7; font-weight: 400; margin-bottom: 0.75rem; position: relative; }
+  .farewell p:last-child { margin-bottom: 0; }
+  .farewell strong { color: var(--white); font-weight: 800; }
+ 
   .alt-item {
-    border-left: 2px solid var(--border);
-    padding: 0.5rem 0 0.5rem 1rem;
-    margin-bottom: 0.75rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    margin-top: 0.75rem;
+    border-left: 3px solid var(--gold);
+    position: relative;
   }
-
-  .alt-item p { font-size: 0.9rem; margin-bottom: 0; }
-
+ 
+  .alt-item p { font-size: 0.88rem; color: rgba(255,255,255,0.85); margin-bottom: 0; }
+  .alt-item strong { color: var(--gold); font-weight: 800; }
+ 
+  .fire-inline {
+    width: 22px;
+    height: 22px;
+    image-rendering: pixelated;
+    vertical-align: middle;
+    margin: 0 2px -3px;
+  }
+ 
   @media (max-width: 480px) {
-    html { font-size: 16px; }
-    h1 { font-size: 1.7rem; }
-    .page { padding: 2rem 0 4rem; }
+    html { font-size: 15px; }
+    .header h1 { font-size: 1.35rem; }
+    .card, .farewell { padding: 1.25rem; }
+    .page { padding: 1.5rem 0 4rem; }
+    .piggy-header { height: 60px; }
   }
 </style>
 </head>
 <body>
 <div class="page">
-
-  <div class="top-label">Уведомление от администрации Pixel</div>
-
-  <h1>Изменение формата работы сервиса</h1>
-  <p class="subtitle">В первую очередь, максимально законно, а также, чтобы ваши переводы не блокировались и операции не занимали часы</p>
-
-  <div class="meta-row">
-    <span class="meta-item">Дата публикации: <strong>25 апреля 2026</strong></span>
-    <span class="meta-item">Вступает в силу: <strong>1 мая 2026</strong></span>
+ 
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <img src="logo.svg" alt="Pixel Pay" class="logo-img">
+      <img src="piggy.png" alt="" class="piggy-header">
+    </div>
+    <div class="admin-label">Уведомление от администрации</div>
+    <h1>Изменение формата работы сервиса</h1>
+    <p class="subtitle">В первую очередь — максимально законно, а также чтобы ваши переводы не блокировались и операции не занимали часы</p>
+    <div class="meta-row">
+      <span class="meta-item">Дата публикации: <strong>25 апреля 2026</strong></span>
+      <span class="meta-item">Вступает в силу: <strong>1 мая 2026</strong></span>
+    </div>
   </div>
-
+ 
   <div class="alert-banner">
+    <img src="warning.png" alt="" class="banner-icon">
     <p><strong>С 1 мая 2026 сервис и бот переходят на обновлённый формат работы.</strong> Изменения затрагивают порядок оформления заявок — пожалуйста, прочитайте внимательно.</p>
   </div>
-
+ 
   <div class="good-banner">
-    <p>Курс остаётся прежним и меняться не будет. Скорость обработки заявок сохраняется. От вас потребуется лишь чуть больше усилий при оформлении — мы постарались свести это к минимуму.</p>
+    <img src="coin.png" alt="" class="banner-icon">
+    <p><strong>Курс остаётся прежним</strong> и меняться не будет. Скорость обработки заявок сохраняется. От вас потребуется лишь чуть больше усилий при оформлении — мы постарались свести это к минимуму.</p>
   </div>
-
-  <section>
-    <h2><span class="section-num">01</span> Почему мы меняемся</h2>
-    <p>Изменения вызваны комплексом новых законодательством в сфере как внутренних переводов в стране, так и трансграничных. Часть законов уже вступила в силу на протяжении последних месяцев, ещё ряд вступит в июне и июле 2026 года.</p>
-    <p>Мы решили действовать заблаговременно — чтобы не оказаться в ситуации, когда переводы начинают блокироваться или занимать часы вместо минут, или и того хуже - всё рухнет как карточный домик. Наша цель остаётся прежней: предоставлять лучший сервис и защищать ваши операции от лишних вопросов со стороны банков.</p>
-  </section>
-
-  <hr class="divider">
-
-  <section>
-    <h2><span class="section-num">02</span> Договор с каждым заказчиком — один раз</h2>
-    <p>Новый закон о переводах требует наличия договора между нами и заказчиком. Это необходимо для того, чтобы платежи не отклонялись и не прерывались — в том числе от третьих лиц, с которыми вы сотрудничаете.</p>
-    <p>Договор заключается <strong>один раз</strong> и касается только того, кто оформляет заявки. Тех, кто оплачивает как третье лицо, это не затрагивает.</p>
-    <div class="highlight-box">
-      <p>Все документы хранятся исключительно у нас и никуда не передаются. Это требование исходит из новых правил о переводах внутри РФ — для прохождения проверок и для вашей же защиты, поскольку новые законы в первую очередь спрашивают именно с клиента.</p>
+ 
+  <!-- 01 -->
+  <div class="card">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Почему мы меняемся</h2>
     </div>
-  </section>
-
-  <hr class="divider">
-
-  <section>
-    <h2><span class="section-num">03</span> Получатель платежа на Alipay / WeChat / др. </h2>
-    <p>Получатель платежа на Alipay и человек, с которым заключён договор, <strong>не должны совпадать</strong>.</p>
-    <div class="highlight-box">
-      <p>Например, если заявку оформляет Петрова — получателем на Alipay НЕ МОЖЕТ быть Петрова или Петров. Получателем должен быть другой человек с другой фамилией — в идеале непосредственный контрагент на китайской стороне.</p>
+    <p>Изменения вызваны комплексом новых законодательств в сфере как внутренних переводов, так и трансграничных. <span class="em-gold">Часть законов уже вступила в силу на протяжении последних месяцев</span>, ещё ряд вступит в июне и июле 2026 года.</p>
+    <p>Мы решили действовать заблаговременно — чтобы не оказаться в ситуации, когда переводы начинают блокироваться или занимать часы вместо минут, или и того хуже — <span class="em-gold">всё рухнет как карточный домик</span> <img src="fire.png" alt="" class="fire-inline">. Наша цель остаётся прежней: предоставлять лучший сервис и защищать ваши операции от лишних вопросов со стороны банков.</p>
+  </div>
+ 
+  <!-- 02 -->
+  <div class="card">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Договор с каждым заказчиком — один раз</h2>
+    </div>
+    <p>Новый закон о переводах требует наличия договора между нами и заказчиком. Это необходимо для того, чтобы <span class="em-gold">платежи не отклонялись и не прерывались</span> — в том числе от третьих лиц, с которыми вы сотрудничаете.</p>
+    <p>Договор заключается <span class="em-gold">один раз</span> и касается только того, кто оформляет заявки. Тех, кто оплачивает как третье лицо, это не затрагивает.</p>
+    <div class="key-highlight">
+      <p>Все документы хранятся <strong>исключительно у нас</strong> и никуда не передаются. Это требование исходит из новых правил о переводах внутри РФ — для прохождения проверок и для <strong>вашей же защиты</strong>, поскольку новые законы в первую очередь спрашивают именно с клиента.</p>
+    </div>
+  </div>
+ 
+  <!-- 03 -->
+  <div class="card">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Получатель платежа на Alipay / WeChat / др.</h2>
+    </div>
+    <p>Получатель платежа на Alipay и человек, с которым заключён договор, <span class="em-red">не должны совпадать</span>.</p>
+    <div class="key-highlight">
+      <p>Например, если заявку оформляет <strong>Петрова</strong> — получателем на Alipay <span class="em-red">НЕ МОЖЕТ</span> быть Петрова или Петров. Получателем должен быть <strong>другой человек с другой фамилией</strong> — в идеале непосредственный контрагент на китайской стороне.</p>
       <p>Если у вас есть вопросы по конкретной ситуации — менеджер поможет подобрать подходящее решение.</p>
     </div>
-  </section>
-
-  <hr class="divider">
-
-  <section>
-    <h2><span class="section-num">04</span> Ещё одно важное нововведение — но мы уже всё для вас сделали</h2>
+  </div>
+ 
+  <!-- 04 -->
+  <div class="card">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Ещё одно важное нововведение — но мы уже всё для вас сделали</h2>
+    </div>
     <ul class="steps">
       <li>
         <span class="step-num">1</span>
         <span class="step-text">
-          <strong>Инвойс на каждый платёж.</strong> Инвойс может быть сформирован как вашим китайским контрагентом, так и вами лично. Он не обязан быть идеальным — достаточно формального документа. Мы добавили автоматическую генерацию прямо в бот: занимает 1–2 минуты.
+          <strong>Инвойс на каждый платёж.</strong> Инвойс может быть сформирован как вашим китайским контрагентом, так и вами лично. <span class="em-gold">Он не обязан быть идеальным</span> — достаточно формального документа. Мы добавили автоматическую генерацию прямо в бот: занимает 1–2 минуты.
           <div class="example-box">
-            <div class="example-label">Пример</div>
+            <div class="example-label">✦ Пример</div>
             <p>Вы заказываете коллекционные карточки из Китая. Не нужно прописывать каждую отдельно — достаточно указать «карточки в ассортименте» и сумму в юанях.</p>
           </div>
-          <div class="example-box" style="margin-top: 0.5rem;">
-            <div class="example-label">Убедительная просьба</div>
-            <p>По возможности прикладывайте фото товара — подойдёт скриншот с Taobao, Goofish или другой площадки (любая подходящая фотография). Это делает инвойс "живым" и снижает риск лишних вопросов.</p>
+          <div class="example-box" style="margin-top: 0.6rem;">
+            <div class="example-label">✦ Убедительная просьба</div>
+            <p>По возможности прикладывайте фото товара — подойдёт скриншот с Taobao, Goofish или другой площадки. Это делает инвойс «живым» и снижает риск лишних вопросов.</p>
           </div>
         </span>
       </li>
@@ -405,48 +466,52 @@
         <span class="step-text"><strong>Платежи от третьих лиц.</strong> Сохраняем возможность принимать платежи от третьих лиц — с учётом вышеупомянутых нововведений.</span>
       </li>
     </ul>
-  </section>
-
-  <hr class="divider">
-
-  <section>
-    <h2><span class="section-num">05</span> Что и когда происходит</h2>
+  </div>
+ 
+  <!-- 05 -->
+  <div class="card">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Что и когда происходит</h2>
+    </div>
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-content">
+        <div>
           <div class="timeline-date">25 апреля 2026</div>
           <div class="timeline-label">Публикация уведомления. Сервис работает в привычном режиме.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot active"></div>
-        <div class="timeline-content">
+        <div>
           <div class="timeline-date">1 мая 2026</div>
           <div class="timeline-label active">Сервис и бот переходят на обновлённый формат работы.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-content">
+        <div>
           <div class="timeline-date">Переходный период</div>
           <div class="timeline-label">Сервис полностью готов к переходу и всё подготовил. Менеджер поможет пройти все шаги быстро и без лишних усилий с вашей стороны.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-content">
+        <div>
           <div class="timeline-date">Июнь — июль 2026</div>
           <div class="timeline-label">Вступление в силу новых законодательств. Мы будем полностью готовы.</div>
         </div>
       </div>
     </div>
-  </section>
-
-  <hr class="divider">
-
-  <section>
-    <h2><span class="section-num">06</span> Связь с менеджером</h2>
+  </div>
+ 
+  <!-- 06 -->
+  <div class="card">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Связь с менеджером</h2>
+    </div>
     <p>Вопросы по переходу или конкретной заявке — мы всегда на связи и поможем разобраться в любой ситуации.</p>
     <div class="contacts-box">
       <div class="contact-row">
@@ -462,22 +527,24 @@
         <span class="contact-value">link</span>
       </div>
     </div>
-  </section>
-
+  </div>
+ 
+  <!-- FAREWELL -->
   <div class="farewell">
-    <p>Отдельно хочется сказать СПАСИБО, что были с нами. Мы понимаем, что новый формат подходит далеко не каждому — это вынужденная мера, и у вас есть время найти нам замену. Приятно было работать с вами, но реалии диктуют свои условия.</p>
+    <div class="farewell-top">
+      <div class="farewell-title">Отдельное слово от нас <img src="coin_yen.png" alt="" style="width:28px;height:28px;vertical-align:middle;image-rendering:pixelated;margin-left:6px;"></div>
+      <img src="piggy.png" alt="" class="piggy-farewell">
+    </div>
+    <p>Отдельно хочется сказать <strong>СПАСИБО</strong>, что были с нами. Мы понимаем, что новый формат подходит далеко не каждому — это вынужденная мера, и у вас есть время найти нам замену. Приятно было работать с вами, но реалии диктуют свои условия.</p>
     <p>Если вы не готовы к новому формату — вот несколько альтернатив от нас:</p>
-
-    <div class="alternatives">
-      <div class="alt-item">
-        <p><strong>Другие обменники.</strong> Продолжают работу, но уже испытывают сложности в связи с изменениями законодательства с 1 июля. У многих скорость обработки заказов заметно снизилась, а курс вырос. Порядка 8 обменников за последние 2 недели приходили к нам с предложением сотрудничества. В каком формате они будут работать дальше неизвестно. </p>
-      </div>
-      <div class="alt-item">
-        <p><strong>Пополнение личных аккаунтов через Сбербанк или Т-Банк.</strong> Разница по курсу с нами около ~50–70 копеек. Скорость варьируется от 1 минуты до 12–24 часов (чаще всего что-то в интервале от 30 минут до нескольких часов, но суммы свыше 2000ю вызывают огромные проблемы) — можно рассмотреть как альтернативу.</p>
-      </div>
+    <div class="alt-item">
+      <p><strong>Другие обменники.</strong> Продолжают работу, но уже испытывают сложности в связи с изменениями законодательства с 1 июля. У многих скорость обработки заказов заметно снизилась, а курс вырос. Порядка 8 обменников за последние 2 недели приходили к нам с предложением сотрудничества — в каком формате они будут работать дальше, неизвестно.</p>
+    </div>
+    <div class="alt-item">
+      <p><strong>Пополнение личных аккаунтов через Сбербанк или Т-Банк.</strong> Разница по курсу с нами около ~50–70 копеек. Скорость варьируется от 1 минуты до 12–24 часов (чаще всего 30 минут — несколько часов, но суммы свыше 2000¥ вызывают огромные проблемы) — можно рассмотреть как альтернативу.</p>
     </div>
   </div>
-
+ 
 </div>
 </body>
 </html>
