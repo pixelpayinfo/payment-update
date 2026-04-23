@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Обновление формата работы сервиса</title>
+<title>Уведомление от администрации Pixel</title>
 <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,6 +16,8 @@
     --paper-warm: #f2ede4;
     --accent: #c0392b;
     --accent-soft: #e8d5d3;
+    --accent-green: #27ae60;
+    --accent-green-soft: #d5ede0;
     --border: #d4cdc2;
     --mono: 'JetBrains Mono', monospace;
     --serif: 'Literata', Georgia, serif;
@@ -77,8 +79,6 @@
 
   .meta-row {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
     padding: 1rem 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -94,32 +94,30 @@
     letter-spacing: 0.05em;
   }
 
-  .meta-item strong {
-    color: var(--accent);
-    font-weight: 500;
-  }
+  .meta-item strong { color: var(--accent); font-weight: 500; }
 
   .alert-banner {
     background: var(--accent-soft);
     border-left: 3px solid var(--accent);
     padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .alert-banner p { font-size: 0.95rem; color: var(--ink); line-height: 1.6; }
+  .alert-banner p strong { color: var(--accent); }
+
+  .good-banner {
+    background: var(--accent-green-soft);
+    border-left: 3px solid var(--accent-green);
+    padding: 1rem 1.25rem;
     margin-bottom: 2.5rem;
     border-radius: 0 4px 4px 0;
   }
 
-  .alert-banner p {
-    font-size: 0.95rem;
-    color: var(--ink);
-    line-height: 1.6;
-  }
+  .good-banner p { font-size: 0.95rem; color: var(--ink); line-height: 1.6; }
 
-  .alert-banner p strong {
-    color: var(--accent);
-  }
-
-  section {
-    margin-bottom: 2.5rem;
-  }
+  section { margin-bottom: 2.5rem; }
 
   h2 {
     font-family: var(--serif);
@@ -143,6 +141,7 @@
     border-radius: 3px;
     position: relative;
     top: -1px;
+    flex-shrink: 0;
   }
 
   p {
@@ -158,7 +157,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
     margin-top: 0.25rem;
   }
 
@@ -192,10 +191,7 @@
     line-height: 1.65;
   }
 
-  .step-text strong {
-    color: var(--ink);
-    font-weight: 600;
-  }
+  .step-text strong { color: var(--ink); font-weight: 600; }
 
   .highlight-box {
     background: var(--paper-warm);
@@ -205,29 +201,41 @@
     margin-top: 1rem;
   }
 
-  .highlight-box p {
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
+  .highlight-box p { font-size: 0.95rem; margin-bottom: 0.75rem; }
+  .highlight-box p:last-child { margin-bottom: 0; }
+
+  .example-box {
+    background: var(--paper);
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-top: 0.75rem;
   }
 
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.5rem 0;
+  .example-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.4rem;
   }
+
+  .example-box p { font-size: 0.9rem; font-style: italic; color: var(--ink-soft); margin-bottom: 0; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 
   .timeline {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    margin-top: 0.5rem;
     position: relative;
+    margin-top: 0.5rem;
   }
 
   .timeline::before {
     content: '';
     position: absolute;
-    left: 0.65rem;
+    left: 0.6rem;
     top: 0.5rem;
     bottom: 0.5rem;
     width: 1px;
@@ -254,10 +262,7 @@
     z-index: 1;
   }
 
-  .timeline-dot.active {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
+  .timeline-dot.active { background: var(--accent); border-color: var(--accent); }
 
   .timeline-content { padding-bottom: 0.5rem; }
 
@@ -270,36 +275,55 @@
     margin-bottom: 0.15rem;
   }
 
-  .timeline-label {
-    font-size: 0.95rem;
-    color: var(--ink);
-    font-weight: 400;
-    line-height: 1.5;
+  .timeline-label { font-size: 0.95rem; color: var(--ink); font-weight: 400; line-height: 1.5; }
+  .timeline-label.active { color: var(--accent); font-weight: 600; }
+
+  .contacts-box {
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.25rem 1.5rem;
+    margin-top: 1rem;
   }
 
-  .timeline-label.active {
-    color: var(--accent);
-    font-weight: 600;
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
   }
 
-  .footnote {
+  .contact-row:last-child { border-bottom: none; }
+
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    min-width: 5rem;
+  }
+
+  .contact-value { font-size: 0.95rem; color: var(--ink); font-weight: 400; }
+
+  .farewell {
     border-top: 2px solid var(--ink);
-    padding-top: 1.5rem;
+    padding-top: 1.75rem;
     margin-top: 3rem;
   }
 
-  .footnote p {
-    font-size: 0.875rem;
-    color: var(--ink-muted);
-    line-height: 1.65;
-    font-style: italic;
+  .farewell p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.7; font-weight: 300; }
+  .farewell p + p { margin-top: 0.75rem; }
+
+  .alternatives { margin-top: 1.5rem; }
+
+  .alt-item {
+    border-left: 2px solid var(--border);
+    padding: 0.5rem 0 0.5rem 1rem;
+    margin-bottom: 0.75rem;
   }
 
-  .footnote p strong {
-    color: var(--ink);
-    font-style: normal;
-    font-weight: 600;
-  }
+  .alt-item p { font-size: 0.9rem; margin-bottom: 0; }
 
   @media (max-width: 480px) {
     html { font-size: 16px; }
@@ -311,95 +335,147 @@
 <body>
 <div class="page">
 
-  <div class="top-label">Для клиентов сервиса</div>
+  <div class="top-label">Уведомление от администрации Pixel</div>
 
-  <h1>Мы становимся лучше — обновление формата работы</h1>
-  <p class="subtitle">Новые возможности, удобство и забота о каждом клиенте</p>
+  <h1>Изменение формата работы сервиса</h1>
+  <p class="subtitle">Забота о вас — в том числе, чтобы ваши переводы не блокировались и операции не занимали часы</p>
 
   <div class="meta-row">
-    <span class="meta-item">Дата публикации: <strong>апрель 2025</strong></span>
-    <span class="meta-item">Вступает в силу: <strong>1 мая 2025</strong></span>
+    <span class="meta-item">Дата публикации: <strong>25 апреля 2026</strong></span>
+    <span class="meta-item">Вступает в силу: <strong>1 мая 2026</strong></span>
   </div>
 
   <div class="alert-banner">
-    <p><strong>С 1 мая сервис переходит на обновлённый формат.</strong> Читайте внимательно — изменения затрагивают порядок оформления заявок. Мы постарались сделать всё максимально просто и комфортно для вас.</p>
+    <p><strong>С 1 мая 2026 сервис и бот переходят на обновлённый формат работы.</strong> Изменения затрагивают порядок оформления заявок — пожалуйста, прочитайте внимательно.</p>
+  </div>
+
+  <div class="good-banner">
+    <p>Курс остаётся прежним и меняться не будет. Скорость обработки заявок сохраняется. От вас потребуется лишь чуть больше усилий при оформлении — мы постарались свести это к минимуму.</p>
   </div>
 
   <section>
     <h2><span class="section-num">01</span> Почему мы меняемся</h2>
-    <p>Сервис планомерно развивается и повышает уровень работы. В рамках этого развития мы обновляем внутренние процессы, чтобы обеспечить вам стабильность, надёжность и долгосрочную работу без перебоев.</p>
-    <p>Новый формат позволяет нам обрабатывать больше заявок, работать быстрее и предоставлять более высокий уровень сервиса каждому клиенту.</p>
+    <p>Изменения вызваны новым законодательством в сфере трансграничных переводов. Часть законов уже вступила в силу на протяжении последних месяцев, ещё ряд норм вступит в июне и июле 2026 года.</p>
+    <p>Мы решили действовать заблаговременно — чтобы не оказаться в ситуации, когда переводы начинают блокироваться или занимать часы вместо минут. Наша цель остаётся прежней: предоставлять лучший сервис и защищать ваши операции от лишних вопросов со стороны банков.</p>
   </section>
 
   <hr class="divider">
 
   <section>
-    <h2><span class="section-num">02</span> Важное об отправителе и получателе</h2>
-    <p>В обновлённом формате мы уделяем особое внимание корректному оформлению заявок. Один из ключевых моментов:</p>
-
+    <h2><span class="section-num">02</span> Договор с каждым заказчиком — один раз</h2>
+    <p>Новый закон о переводах требует наличия договора между сервисом и заказчиком. Это необходимо для того, чтобы платежи не отклонялись — в том числе от третьих лиц, с которыми вы сотрудничаете.</p>
+    <p>Договор заключается <strong>один раз</strong> и касается только того, кто оформляет заявки. Тех, кто оплачивает как третье лицо, это не затрагивает.</p>
     <div class="highlight-box">
-      <p><strong>Получатель платежа и отправитель не должны совпадать.</strong></p>
-      <p style="margin-top: 0.6rem;">Например, если заявку оформляет Петрова — получателем не может быть Петрова или Петров. Получателем должен быть другой человек, в идеале — непосредственный контрагент на китайской стороне.</p>
-      <p style="margin-top: 0.6rem;">Это стандартное требование при работе с международными платежами. Если у вас есть вопросы по конкретной ситуации — менеджер поможет подобрать подходящее решение.</p>
+      <p>Все документы хранятся внутри сервиса и никуда не передаются. Это требование исходит из новых правил о переводах — для прохождения проверок и для вашей же защиты, поскольку новые законы в первую очередь спрашивают именно с клиента.</p>
     </div>
   </section>
 
   <hr class="divider">
 
   <section>
-    <h2><span class="section-num">03</span> Что нового и как это удобно для вас</h2>
+    <h2><span class="section-num">03</span> Получатель платежа на Alipay</h2>
+    <p>Получатель платежа на Alipay и человек, с которым заключён договор, <strong>не должны совпадать</strong>.</p>
+    <div class="highlight-box">
+      <p>Например, если заявку оформляет Петрова — получателем на Alipay не может быть Петрова или Петров. Получателем должен быть другой человек — в идеале непосредственный контрагент на китайской стороне.</p>
+      <p>Если у вас есть вопросы по конкретной ситуации — менеджер поможет подобрать подходящее решение.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section>
+    <h2><span class="section-num">04</span> Ещё одно важное нововведение — но мы уже всё для вас сделали</h2>
     <ul class="steps">
       <li>
         <span class="step-num">1</span>
-        <span class="step-text"><strong>Инвойс за 1–2 минуты.</strong> Теперь каждая заявка сопровождается документом. Мы добавили автоматическую генерацию прямо в бот — никаких лишних шагов, всё быстро и понятно.</span>
+        <span class="step-text">
+          <strong>Инвойс на каждый платёж.</strong> Инвойс может быть сформирован как вашим китайским контрагентом, так и вами лично. Он не обязан быть идеальным — достаточно формального документа. Мы добавили автоматическую генерацию прямо в бот: занимает 1–2 минуты.
+          <div class="example-box">
+            <div class="example-label">Пример</div>
+            <p>Вы заказываете коллекционные карточки из Китая. Не нужно прописывать каждую отдельно — достаточно указать «карточки в ассортименте» и сумму в юанях.</p>
+          </div>
+          <div class="example-box" style="margin-top: 0.5rem;">
+            <div class="example-label">Убедительная просьба</div>
+            <p>По возможности прикладывайте фото товара — подойдёт скриншот с Taobao, Goofish или другой площадки. Это делает инвойс живым и снижает риск лишних вопросов.</p>
+          </div>
+        </span>
       </li>
       <li>
         <span class="step-num">2</span>
-        <span class="step-text"><strong>Разовое соглашение.</strong> Один раз оформляем небольшой договор — и больше к этому не возвращаемся. Это занимает пару минут и делается один раз на всё время работы с нами.</span>
-      </li>
-      <li>
-        <span class="step-num">3</span>
-        <span class="step-text"><strong>Платежи от третьих лиц.</strong> По-прежнему принимаем оплату от любого удобного вам отправителя.</span>
+        <span class="step-text"><strong>Платежи от третьих лиц.</strong> Сохраняем возможность принимать платежи от третьих лиц — с учётом вышеупомянутых нововведений.</span>
       </li>
     </ul>
-
-    <div class="highlight-box" style="margin-top: 1.25rem;">
-      <p>Все оформляемые документы остаются внутри сервиса и никуда не передаются. Они нужны исключительно для внутреннего учёта и при необходимости — для подтверждения операций перед банком.</p>
-    </div>
   </section>
 
   <hr class="divider">
 
   <section>
-    <h2><span class="section-num">04</span> Что и когда происходит</h2>
+    <h2><span class="section-num">05</span> Что и когда происходит</h2>
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-date">Сейчас — апрель 2025</div>
-          <div class="timeline-label">Сервис работает в привычном режиме. Рекомендуем ознакомиться с изменениями заранее.</div>
+          <div class="timeline-date">25 апреля 2026</div>
+          <div class="timeline-label">Публикация уведомления. Сервис работает в привычном режиме. Рекомендуем ознакомиться с изменениями заранее.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot active"></div>
         <div class="timeline-content">
-          <div class="timeline-date">1 мая 2025</div>
-          <div class="timeline-label active">Переход на обновлённый формат. Текущий бот завершает работу.</div>
+          <div class="timeline-date">1 мая 2026</div>
+          <div class="timeline-label active">Сервис и бот переходят на обновлённый формат работы.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
           <div class="timeline-date">Переходный период</div>
-          <div class="timeline-label">Новый бот уже готов. Менеджер поможет пройти все шаги быстро и без лишних усилий с вашей стороны.</div>
+          <div class="timeline-label">Сервис полностью готов к переходу и всё подготовил. Менеджер поможет пройти все шаги быстро и без лишних усилий с вашей стороны.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">Июнь — июль 2026</div>
+          <div class="timeline-label">Вступление в силу новых норм законодательства. Мы будем полностью готовы.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="footnote">
-    <p>Вопросы по переходу или конкретной заявке — пишите менеджеру в Telegram. Мы всегда на связи и поможем разобраться в любой ситуации.</p>
-    <p style="margin-top: 0.75rem;"><strong>Спасибо, что доверяете нам.</strong> Всё, что мы делаем — ради вашего удобства и стабильной работы сервиса.</p>
+  <hr class="divider">
+
+  <section>
+    <h2><span class="section-num">06</span> Связь с менеджером</h2>
+    <p>Вопросы по переходу или конкретной заявке — мы всегда на связи и поможем разобраться в любой ситуации.</p>
+    <div class="contacts-box">
+      <div class="contact-row">
+        <span class="contact-label">Telegram</span>
+        <span class="contact-value">@username</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">MAX</span>
+        <span class="contact-value">@username</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">Avito</span>
+        <span class="contact-value">link</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="farewell">
+    <p>Всем спасибо, что были с нами. Мы понимаем, что новый формат подходит далеко не каждому — это вынужденная мера, и у вас есть время найти нам замену. Приятно было работать с вами, но реалии диктуют свои условия.</p>
+    <p>Если вы пока не готовы к новому формату — вот несколько альтернатив:</p>
+
+    <div class="alternatives">
+      <div class="alt-item">
+        <p><strong>Другие обменники.</strong> Продолжают работу, но уже испытывают сложности в связи с изменениями законодательства с 1 июля. У многих скорость обработки заказов заметно снизилась, а курс вырос.</p>
+      </div>
+      <div class="alt-item">
+        <p><strong>Пополнение личных аккаунтов через Сбербанк или Т-Банк.</strong> Разница по курсу с нами около ~50–70 копеек. Скорость варьируется от 1 минуты до 12–24 часов — можно рассмотреть как альтернативу.</p>
+      </div>
+    </div>
   </div>
 
 </div>
