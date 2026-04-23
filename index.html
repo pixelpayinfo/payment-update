@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Важные изменения в работе сервиса</title>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-muted: #888;
+    --paper: #f9f6f0;
+    --paper-warm: #f2ede4;
+    --accent: #c0392b;
+    --accent-soft: #e8d5d3;
+    --border: #d4cdc2;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Literata', Georgia, serif;
+  }
+
+  html { font-size: 18px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.75;
+    min-height: 100vh;
+    padding: 0 1rem;
+  }
+
+  .page {
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 3.5rem 0 6rem;
+  }
+
+  .top-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .top-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+
+  .meta-item {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .meta-item strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .alert-banner {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .alert-banner p {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .alert-banner p strong {
+    color: var(--accent);
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+
+  h2 .section-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    padding: 0.15rem 0.4rem;
+    border: 1px solid var(--accent-soft);
+    border-radius: 3px;
+    position: relative;
+    top: -1px;
+  }
+
+  p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  .steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .step-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--paper);
+    background: var(--ink);
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    font-weight: 500;
+  }
+
+  .step-text {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .step-text strong {
+    color: var(--ink);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .highlight-box {
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .highlight-box p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0.5rem;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.65rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    align-items: start;
+  }
+
+  .timeline-dot {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--paper);
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .timeline-content {
+    padding-bottom: 0.5rem;
+  }
+
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+  }
+
+  .timeline-label {
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .timeline-label.active {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .footnote {
+    background: var(--paper-warm);
+    border-top: 2px solid var(--ink);
+    padding: 1.5rem 0 0;
+    margin-top: 3rem;
+  }
+
+  .footnote p {
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  .footnote p strong {
+    color: var(--ink);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  @media (max-width: 480px) {
+    html { font-size: 16px; }
+    h1 { font-size: 1.7rem; }
+    .page { padding: 2rem 0 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top-label">Официальное уведомление</div>
+
+  <h1>Важные изменения в работе сервиса</h1>
+  <p class="subtitle">Переход на статус агента ВЭД и новые требования к платежам</p>
+
+  <div class="meta-row">
+    <span class="meta-item">Дата публикации: <strong>апрель 2025</strong></span>
+    <span class="meta-item">Вступает в силу: <strong>1 мая 2025</strong></span>
+    <span class="meta-item">Причина: <strong>новое законодательство</strong></span>
+  </div>
+
+  <div class="alert-banner">
+    <p><strong>Текущий бот прекращает работу 1 мая 2025 года.</strong> Пожалуйста, ознакомьтесь с изменениями заранее, чтобы переход прошёл без задержек в ваших платежах.</p>
+  </div>
+
+  <section>
+    <h2><span class="section-num">01</span> Почему меняется формат работы</h2>
+    <p>В связи с актуальным и предстоящим российским законодательством о трансграничных переводах мы переходим на статус <strong>агента ВЭД</strong> (внешнеэкономической деятельности). Это позволяет нам работать полностью в правовом поле и минимизировать риски для вас как клиента.</p>
+    <p>Изменения касаются не только нашего сервиса — летом 2025 года вступят в силу новые нормы, которые существенно затронут весь рынок трансграничных платежей. Мы адаптируемся заблаговременно.</p>
+  </section>
+
+  <hr class="divider">
+
+  <section>
+    <h2><span class="section-num">02</span> Что изменилось в платежах</h2>
+    <p>Ключевое ограничение: в статусе агента ВЭД мы <strong>не можем пополнять личные аккаунты Alipay</strong>.</p>
+    <p>По-прежнему доступно пополнение:</p>
+    <ul class="steps">
+      <li>
+        <span class="step-num">→</span>
+        <span class="step-text">Корпоративных аккаунтов и счетов юридических лиц в Китае</span>
+      </li>
+      <li>
+        <span class="step-num">→</span>
+        <span class="step-text">Других аккаунтов, не являющихся личными</span>
+      </li>
+      <li>
+        <span class="step-num">→</span>
+        <span class="step-text">Переводы от третьих лиц — также доступны</span>
+      </li>
+    </ul>
+  </section>
+
+  <hr class="divider">
+
+  <section>
+    <h2><span class="section-num">03</span> Что теперь требуется от вас</h2>
+    <ul class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <span class="step-text"><strong>Инвойс на каждый платёж.</strong> Новое законодательство требует документального подтверждения каждой операции. Мы встроили генерацию инвойса прямо в новый бот — это займёт 1–2 минуты, процесс максимально простой.</span>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <span class="step-text"><strong>Договор с нами — один раз.</strong> Разовое оформление договора на оказание услуг. Подписывается один раз — повторно не потребуется.</span>
+      </li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>Все документы и договоры хранятся только у нас и <strong>никуда не передаются</strong>. Они служат исключительно для ответа на возможные запросы банка — формальность, которую требует законодательство, и не более того.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section>
+    <h2><span class="section-num">04</span> Хронология перехода</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">Сейчас — апрель 2025</div>
+          <div class="timeline-label">Текущий бот работает в штатном режиме. Рекомендуем ознакомиться с новым форматом заранее.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1 мая 2025</div>
+          <div class="timeline-label active">Текущий бот отключается. Начинается переходный период.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">Переходный период</div>
+          <div class="timeline-label">Помогаем всем клиентам перейти на новый формат. Новый бот уже готов: встроенная генерация инвойсов и упрощённое оформление документов.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">Лето 2025</div>
+          <div class="timeline-label">Вступление в силу новых норм законодательства. Мы будем полностью готовы.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footnote">
+    <p>Если у вас есть вопросы — пишите менеджеру или в новый бот. Мы поможем оформить все необходимые документы и провести первый платёж в новом формате.</p>
+    <p style="margin-top: 0.75rem;"><strong>Спасибо, что остаётесь с нами.</strong> Мы делаем всё, чтобы переход прошёл максимально гладко и без задержек в ваших платежах.</p>
+  </div>
+
+</div>
+</body>
+</html>
