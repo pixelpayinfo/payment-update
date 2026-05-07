@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Уведомление от администрации Pixel Pay</title>
+<title>Важное сообщение — Pixel Pay</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,6 +40,23 @@
   }
 
   .page { max-width: 680px; margin: 0 auto; padding: 2.5rem 0 6rem; }
+
+  /* ── FADE-IN ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .page > * {
+    animation: fadeUp .45s ease both;
+  }
+  .page > *:nth-child(1) { animation-delay: .05s; }
+  .page > *:nth-child(2) { animation-delay: .12s; }
+  .page > *:nth-child(3) { animation-delay: .19s; }
+  .page > *:nth-child(4) { animation-delay: .26s; }
+  .page > *:nth-child(5) { animation-delay: .33s; }
+  .page > *:nth-child(6) { animation-delay: .40s; }
+  .page > *:nth-child(7) { animation-delay: .47s; }
+  .page > *:nth-child(8) { animation-delay: .54s; }
 
   /* ── HEADER ── */
   .header {
@@ -84,12 +101,12 @@
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    background: var(--gold);
-    color: var(--purple-deep);
+    background: #e53935;
+    color: #fff;
     padding: 0.35rem 0.8rem;
     border-radius: 6px;
     margin-bottom: 0.9rem;
-    box-shadow: 3px 3px 0 var(--gold-dark);
+    box-shadow: 3px 3px 0 #a01010;
   }
 
   .header h1 {
@@ -189,6 +206,13 @@
   .key-highlight p:last-child { margin-bottom: 0; }
   .key-highlight strong { font-weight: 800; color: var(--purple-deep); }
 
+  .key-highlight.gold-hl {
+    background: #fffbe6;
+    border-left-color: var(--gold-dark);
+  }
+  .key-highlight.gold-hl strong { color: #7a5500; }
+  .key-highlight.gold-hl p { color: #4a3800; }
+
   .em-gold {
     font-weight: 800;
     color: var(--purple-deep);
@@ -198,124 +222,83 @@
 
   .em-red { font-weight: 800; color: #c0392b; }
 
-  /* ── STEPS ── */
-  .steps { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
-  .steps li { display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.75rem; align-items: start; }
+  /* ── IP BLOCK ── */
+  .ip-card {
+    background: linear-gradient(135deg, #1a0a3a 0%, #3a1a8a 100%);
+    border-radius: 18px;
+    padding: 1.6rem 1.75rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 24px rgba(58,26,138,0.25);
+    position: relative;
+    overflow: hidden;
+  }
 
-  .step-num {
-    font-size: 0.75rem;
-    font-weight: 900;
-    color: var(--white);
-    background: var(--purple-main);
-    border-radius: 8px;
-    width: 1.85rem;
-    height: 1.85rem;
+  .ip-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(255,255,255,0.025) 15px, rgba(255,255,255,0.025) 16px),
+      repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,255,255,0.025) 15px, rgba(255,255,255,0.025) 16px);
+    pointer-events: none;
+  }
+
+  .ip-card .section-num {
+    background: rgba(245,197,24,0.2);
+    color: var(--gold);
+    position: relative;
+  }
+
+  .ip-card h2 { color: var(--gold); position: relative; }
+  .ip-card p { color: rgba(255,255,255,0.82); position: relative; }
+  .ip-card strong { color: var(--white); }
+
+  .ip-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  .ip-perks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.55;
+  }
+
+  .ip-perk-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    background: rgba(245,197,24,0.18);
+    border-radius: 7px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 0.85rem;
     flex-shrink: 0;
-    margin-top: 0.1rem;
-    box-shadow: 2px 2px 0 var(--purple-deep);
+    margin-top: 0.05rem;
+    border: 1px solid rgba(245,197,24,0.25);
   }
 
-  .step-text { font-size: 0.975rem; color: var(--ink-soft); line-height: 1.65; }
-  .step-text strong { color: var(--ink); font-weight: 800; }
-
-  .example-box {
-    background: var(--purple-bg);
-    border: 1.5px dashed var(--purple-light);
-    border-radius: 12px;
-    padding: 0.9rem 1.1rem;
-    margin-top: 0.75rem;
-  }
-
-  .example-label {
-    font-size: 0.62rem;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--purple-mid);
-    margin-bottom: 0.4rem;
-  }
-
-  .example-box p { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 0; }
-
-  /* ── ACCORDION ── */
-  .accordion {
-    margin-top: 0.75rem;
-  }
-
-  .accordion-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    background: var(--purple-pale);
-    border: none;
-    border-radius: 8px;
-    padding: 0.6rem 0.9rem;
-    font-family: var(--body);
-    font-size: 0.88rem;
-    font-weight: 700;
+  .ip-badge {
+    display: inline-block;
+    background: var(--gold);
     color: var(--purple-deep);
-    cursor: pointer;
-    transition: background .2s ease;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 5px;
+    margin-top: 1.1rem;
+    box-shadow: 2px 2px 0 var(--gold-dark);
+    position: relative;
   }
-
-  .accordion-toggle:hover {
-    background: #cfc5ee;
-  }
-
-  .accordion-arrow {
-    flex-shrink: 0;
-    transition: transform .25s ease;
-    color: var(--purple-mid);
-  }
-
-  .accordion.open .accordion-arrow {
-    transform: rotate(180deg);
-  }
-
-  .accordion-body {
-    display: none;
-    padding: 0.75rem 0 0.25rem;
-  }
-
-  .accordion.open .accordion-body {
-    display: block;
-  }
-
-  .accordion-img {
-    width: 100%;
-    border-radius: 10px;
-    border: 1.5px solid var(--purple-pale);
-    cursor: zoom-in;
-    transition: opacity .2s ease;
-    display: block;
-  }
-
-  .accordion-img:hover {
-    opacity: 0.88;
-  }
-
-  .accordion-caption {
-    font-size: 0.78rem;
-    color: var(--ink-muted);
-    margin: 0.5rem 0 0;
-    text-align: center;
-  }
-
-  /* ── COIN DIVIDER ── */
-  .coin-divider {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 0.25rem 0 0.25rem;
-    opacity: 0.5;
-  }
-
-  .coin-divider img { width: 20px; height: 20px; image-rendering: pixelated; }
-  .coin-divider-line { flex: 1; height: 1px; background: var(--purple-pale); }
 
   /* ── TIMELINE ── */
   .timeline { display: flex; flex-direction: column; position: relative; margin-top: 0.5rem; }
@@ -345,11 +328,13 @@
     box-shadow: 2px 2px 0 var(--purple-pale);
   }
 
-  .timeline-dot.active { background: var(--purple-main); border-color: var(--purple-main); box-shadow: 2px 2px 0 var(--purple-deep); }
+  .timeline-dot.active { background: #e53935; border-color: #e53935; box-shadow: 2px 2px 0 #a01010; }
+  .timeline-dot.done { background: var(--purple-light); border-color: var(--purple-light); box-shadow: 2px 2px 0 var(--purple-mid); }
 
   .timeline-date { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.2rem; }
   .timeline-label { font-size: 0.93rem; color: var(--ink); font-weight: 400; line-height: 1.5; }
-  .timeline-label.active { color: var(--purple-main); font-weight: 800; }
+  .timeline-label.active { color: #c0392b; font-weight: 800; }
+  .timeline-label.done { color: var(--ink-muted); }
 
   /* ── CONTACTS ── */
   .contacts-box {
@@ -414,30 +399,10 @@
   .farewell p:last-child { margin-bottom: 0; }
   .farewell strong { color: var(--white); font-weight: 800; }
 
-  .alt-item {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 0.9rem 1.1rem;
-    margin-top: 0.75rem;
-    border-left: 3px solid var(--gold);
-    position: relative;
-  }
-
-  .alt-item p { font-size: 0.88rem; color: rgba(255,255,255,0.85); margin-bottom: 0; }
-  .alt-item strong { color: var(--gold); font-weight: 800; }
-
-  .fire-inline {
-    width: 22px;
-    height: 22px;
-    image-rendering: pixelated;
-    vertical-align: middle;
-    margin: 0 2px -3px;
-  }
-
   @media (max-width: 480px) {
     html { font-size: 15px; }
     .header h1 { font-size: 1.35rem; }
-    .card, .farewell { padding: 1.25rem; }
+    .card, .farewell, .ip-card { padding: 1.25rem; }
     .page { padding: 1.5rem 0 4rem; }
     .piggy-header { height: 60px; }
   }
@@ -452,153 +417,111 @@
       <img src="logo.svg" alt="Pixel Pay" class="logo-img">
       <img src="piggy.png" alt="" class="piggy-header">
     </div>
-    <div class="admin-label">Уведомление от администрации</div>
-    <h1>Изменение формата работы сервиса</h1>
-    <p class="subtitle">В первую очередь — максимально законно, а также чтобы ваши переводы не блокировались и операции не занимали часы</p>
+    <div class="admin-label">Важное сообщение</div>
+    <h1>Pixel Pay прекращает работу с физическими лицами</h1>
+    <p class="subtitle">Мы потратили 2.5 месяца на поиск решения — и честно признаёмся, что его не существует в нынешних условиях</p>
     <div class="meta-row">
-      <span class="meta-item">Дата публикации: <strong>25 апреля 2026</strong></span>
-      <span class="meta-item">Вступает в силу: <strong>1 мая 2026</strong></span>
+      <span class="meta-item">Дата публикации: <strong>7 мая 2026</strong></span>
+      <span class="meta-item">Вступает в силу: <strong>1 июня 2026 (100%)</strong></span>
     </div>
   </div>
 
+  <!-- ALERT -->
   <div class="alert-banner">
     <img src="warning.png" alt="" class="banner-icon">
-    <p><strong>С 1 мая 2026 сервис и бот переходят на обновлённый формат работы.</strong> Изменения затрагивают порядок оформления заказов — пожалуйста, прочитайте внимательно.</p>
+    <p><strong>С 1 июня 2026 Pixel Pay полностью прекращает работу с физическими лицами — в любом формате. </strong> У вас есть время, чтобы найти альтернативу. До 1 июня мы решили продолжить работу в текущем в формате, чтобы дать Вам время перестроиться.</p>
   </div>
 
+  <!-- GOOD -->
   <div class="good-banner">
     <img src="coin.png" alt="" class="banner-icon">
-    <p><strong>Курс остаётся прежним, минимальная сумма заказа не меняется</strong> и меняться не будет. Скорость обработки заявок сохраняется. От вас потребуется лишь чуть больше усилий при оформлении — мы постарались свести это к минимуму.</p>
+    <p>Работа с <strong>индивидуальными предпринимателями и юрлицами продолжается</strong>. Для ИП и ООО изменения будут минимальными, а минимальный порог платежа снизится до <strong>1 000 ¥</strong>.</p>
   </div>
 
-  <!-- 01 -->
+  <!-- 01 — ПОЧЕМУ -->
   <div class="card">
     <div class="section-header">
       <span class="section-num">01</span>
-      <h2>Почему мы меняемся</h2>
+      <h2>Что произошло</h2>
     </div>
-    <p>Изменения вызваны комплексом новых законодательств как внутренних переводов в РФ, так и трансграничных. <span class="em-gold">Часть законов уже вступила в силу на протяжении последних месяцев</span>, ещё ряд вступит в июне и июле 2026 года.</p>
-    <p>Мы решили действовать заблаговременно — чтобы не оказаться в ситуации, когда переводы начинают блокироваться или занимать часы вместо минут, или и того хуже — <span class="em-gold">всё рухнет как карточный домик</span> <img src="fire.png" alt="" class="fire-inline">. Наша цель остаётся прежней: предоставлять лучший сервис и защищать ваши операции от лишних вопросов со стороны банков.</p>
+    <p>В апреле мы запустили тестовый режим с обновлённым форматом работы для физлиц. После нескольких недель испытаний с некоторыми постоянными клиентами всплыли неожиданные подробности: <span class="em-gold">новый формат не решает ключевые проблемы</span>. Недели подготовки, несколько бессонных ночей в поисках выхода и честный итог: в нынешних условиях работа с физическими лицами невозможна.</p>
+    <p>Основная причина — <span class="em-red">государство последовательно закрывает любые легальные возможности для физлиц вести коммерческую деятельность</span> в области трансграничных переводов. Некоторые новые законы уже вступили в силу, ещё несколько вступят в июне–июле 2026 года. Мы не нашли ни одной схемы, которая одновременно работала бы и оставалась законной.</p>
+    <div class="key-highlight">
+      <p>Мы сообщаем об этом заранее, чтобы у вас <strong>было время оценить рынок и найти альтернативу</strong>. Работа сервиса продолжается до 1 июня в прежнем режиме.</p>
+    </div>
   </div>
 
-  <!-- 02 -->
+  <!-- 02 — ТАЙМЛАЙН -->
   <div class="card">
     <div class="section-header">
       <span class="section-num">02</span>
-      <h2>Договор с каждым заказчиком — один раз</h2>
-    </div>
-    <p>Новый закон о переводах требует наличия договора между нами и заказчиком. Это необходимо для того, чтобы <span class="em-gold">платежи не отклонялись и не прерывались</span> — в том числе от третьих лиц, с которыми вы сотрудничаете.</p>
-    <p>Договор заключается <span class="em-gold">один раз</span> и касается только того, кто оформляет заявки. Тех, кто оплачивает как третье лицо, это не затрагивает.</p>
-    <div class="key-highlight">
-      <p>Все документы хранятся <strong>исключительно у нас</strong> и никуда не передаются. Это требование исходит из новых правил о переводах внутри РФ — для прохождения проверок и для <strong>вашей же защиты</strong>, поскольку новые законы в первую очередь спрашивают именно с клиента.</p>
-    </div>
-  </div>
-
-  <!-- 03 -->
-  <div class="card">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2>Получатель платежа на Alipay / WeChat / др.</h2>
-    </div>
-    <p>Мы не пополняем Alipay на имя того, с кем заключён договор <span class="em-red">(ваш личный аккаунт)</span>, но произведём оплату на имя третьего лица <span class="em-gold">(контрагент, поставщик, любой другой получатель)</span>.</p>
-    <div class="key-highlight">
-      <p>Например, если заявку оформляет <strong>Петрова</strong> — получателем может быть её китайский поставщик, знакомый продавец на Taobao или любое другое лицо, которому предназначен платёж (но не Петрова или Петров).</p>
-      <p>Если у вас есть вопросы по конкретной ситуации — менеджер поможет подобрать подходящее решение.</p>
-    </div>
-  </div>
-
-  <!-- 04 -->
-  <div class="card">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2>Ещё одно важное нововведение — но мы уже всё для вас сделали</h2>
-    </div>
-    <ul class="steps">
-      <li>
-        <span class="step-num">1</span>
-        <span class="step-text">
-          <strong>Инвойс на каждый платёж.</strong> Инвойс может быть сформирован как вашим китайским контрагентом, так и вами лично (допускается загрузка своих файлов). <span class="em-gold">Он не обязан быть идеальным</span> — достаточно формального документа. В новом боте вы сможете сгенерировать инвойс прямо в чате — это займёт около минуты.
-          <div class="example-box">
-            <div class="example-label">✦ Пример</div>
-            <p>Вы заказываете коллекционные карточки из Китая. Не нужно прописывать каждую отдельно — достаточно указать «карточки в ассортименте» и сумму в юанях.</p>
-
-            <div class="accordion" id="invoice-accordion">
-              <button
-                class="accordion-toggle"
-                onclick="document.getElementById('invoice-accordion').classList.toggle('open')"
-              >
-                <span>Посмотреть пример инвойса</span>
-                <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-              <div class="accordion-body">
-                <a href="invoice_example.png" target="_blank">
-                  <img src="invoice_example.png" alt="Пример инвойса" class="accordion-img">
-                </a>
-                <p class="accordion-caption">Нажмите на изображение, чтобы открыть в полном размере</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="example-box" style="margin-top: 0.6rem;">
-            <div class="example-label">✦ Убедительная просьба</div>
-            <p>По возможности добавляйте в инвойс фото товара — подойдёт скриншот с Taobao, Goofish, другой площадки или любая другая фотография. Это делает инвойс «живым» и снижает риск лишних вопросов.</p>
-          </div>
-        </span>
-      </li>
-      <li>
-        <span class="step-num">2</span>
-        <span class="step-text"><strong>Платежи от третьих лиц.</strong> Сохраняем возможность принимать платежи от третьих лиц — с учётом вышеупомянутых нововведений.</span>
-      </li>
-    </ul>
-  </div>
-
-  <!-- 05 -->
-  <div class="card">
-    <div class="section-header">
-      <span class="section-num">05</span>
-      <h2>Что и когда происходит</h2>
+      <h2>Что и когда</h2>
     </div>
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div>
-          <div class="timeline-date">25 апреля 2026</div>
-          <div class="timeline-label">Публикация уведомления. Сервис работает в привычном режиме.</div>
-        </div>
-      </div>
-      <div class="timeline-item">
         <div class="timeline-dot active"></div>
         <div>
-          <div class="timeline-date">1 мая 2026</div>
-          <div class="timeline-label active">Сервис и бот переходят на обновлённый формат работы.</div>
+          <div class="timeline-date">7 мая 2026 — сейчас</div>
+          <div class="timeline-label active">Публикация уведомления. Сервис работает в обычном режиме.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div>
-          <div class="timeline-date">Переходный период</div>
-          <div class="timeline-label">Сервис полностью готов к переходу и всё подготовил. Менеджер поможет пройти все шаги быстро и без лишних усилий с вашей стороны.</div>
+          <div class="timeline-date">1 июня 2026</div>
+          <div class="timeline-label">Прекращение работы с физическими лицами. Работа с ИП продолжается.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div>
           <div class="timeline-date">Июнь — июль 2026</div>
-          <div class="timeline-label">Вступление в силу новых законодательств. Мы будем полностью готовы.</div>
+          <div class="timeline-label">Вступление в силу новых законодательных ограничений, которые ударят по всему рынку.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 06 -->
+  <!-- 03 — ИП -->
+  <div class="ip-card">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Работа с ИП</h2>
+    </div>
+    <p>Если вы занимаетесь закупками, баерством или выкупом товара на регулярной основе — <strong>статус ИП решает большинство проблем</strong> раз и навсегда. Это проще, чем кажется. На дистанции последнего года несколько десятков наших клиентов (баеры/работа под выкуп) перешли на работу через ИП и очень боялись, что  потеряют клиентскую базу. На деле же у всех максимально позитивный опыт и они планомерно растут.
+    Мы не призываем Вас задуматься, идти открывать ИП или что-либо ещё. Мы лишь хотим дать Вам понять, что в этом нет ничего страшного. </p>
+    <ul class="ip-perks">
+      <li>
+        <span class="ip-perk-icon">✦</span>
+        <span>Минимальный порог платежа снижается до <strong>1 000 ¥</strong> — специально для ИП.</span>
+      </li>
+      <li>
+        <span class="ip-perk-icon">✦</span>
+        <span>Изменения в формате работы будут <strong>минимальными</strong> — ничего принципиально нового.</span>
+      </li>
+      <li>
+        <span class="ip-perk-icon">✦</span>
+        <span>Платежи проходят <strong>легально и без блокировок</strong> — банки не задают лишних вопросов.</span>
+      </li>
+      <li>
+        <span class="ip-perk-icon">✦</span>
+        <span>Байерам и выкупщикам: можно платить <strong>не 6% с оборота</strong>, а есть рабочие схемы с уплатой налога исключительно с Вашей комиссии. Напишите администору, он расскажет подробнее.</span>
+      </li>
+      <li>
+        <span class="ip-perk-icon">✦</span>
+        <span>В среднем накладные расходы составят <strong>1–5% к стоимости</strong> для конечного покупателя (зависит от объёмов). Зато — спокойно и легально.</span>
+      </li>
+    </ul>
+    <span class="ip-badge">Открыть ИП можно онлайн за 1 день, при чём в большинстве случаев это за Вас может сделать банк.</span>
+  </div>
+
+  <!-- 04 — КОНТАКТЫ -->
   <div class="card">
     <div class="section-header">
-      <span class="section-num">06</span>
-      <h2>Связь с менеджером</h2>
+      <span class="section-num">04</span>
+      <h2>Остались вопросы?</h2>
     </div>
-    <p>Вопросы по переходу или конкретному случаю — мы всегда на связи и поможем разобраться в любой ситуации.</p>
+    <p>Если хотите понять, как перейти на ИП, или у вас есть вопросы по конкретной ситуации — менеджер на связи и поможет разобраться.</p>
     <div class="contacts-box">
       <div class="contact-row">
         <span class="contact-label">Telegram</span>
@@ -614,17 +537,11 @@
   <!-- FAREWELL -->
   <div class="farewell">
     <div class="farewell-top">
-      <div class="farewell-title">Отдельное слово от нас <img src="coin_yen.png" alt="" style="width:28px;height:28px;vertical-align:middle;image-rendering:pixelated;margin-left:6px;"></div>
+      <div class="farewell-title">Слово от команды <img src="coin_yen.png" alt="" style="width:28px;height:28px;vertical-align:middle;image-rendering:pixelated;margin-left:6px;"></div>
       <img src="piggy.png" alt="" class="piggy-farewell">
     </div>
-    <p>Отдельно хочется сказать <strong>СПАСИБО</strong>, что были с нами. Мы понимаем, что новый формат подходит далеко не каждому — это вынужденная мера, и у вас есть время найти нам замену. Приятно осознавать, что мы были для Вас основным контрагентом, но реалии диктуют свои условия.</p>
-    <p>Если вы не готовы к новому формату — вот несколько альтернатив от нас:</p>
-    <div class="alt-item">
-      <p><strong>Другие обменники.</strong> Продолжают работу, но уже испытывают сложности в связи с изменениями законодательства с 1 июля. У многих скорость обработки заказов заметно снизилась, а курс вырос. Порядка 8 обменников за последние 2 недели приходили к нам с предложением сотрудничества — в каком формате они будут работать дальше, неизвестно.</p>
-    </div>
-    <div class="alt-item">
-      <p><strong>Пополнение личных аккаунтов через Сбербанк или Т-Банк.</strong> Разница по курсу с нами около ~50–70 копеек. Скорость варьируется от 1 минуты до 12–24 часов (чаще всего 30 минут — несколько часов, но суммы свыше 2000¥ вызывают огромные проблемы) — можно рассмотреть как альтернативу.</p>
-    </div>
+    <p><strong>Спасибо, что были с нами.</strong> Это не то решение, которое мы хотели принять. Мы провели несколько месяцев в поисках выхода и сделали всё возможное, чтобы сохранить сервис в привычном формате. Но реалии оказались сильнее.</p>
+    <p>Мы понимаем, что новый формат подходит не всем, и даём Вам время найти альтернативу. Если когда-нибудь ситуация изменится — мы вернёмся. А пока — работаем для тех, кто готов двигаться дальше вместе с нами.</p>
   </div>
 
 </div>
